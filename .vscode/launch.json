@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/YazılımEgitimi/42Kocaeli/C01/ex06",
-      "program": "c:/YazılımEgitimi/42Kocaeli/C01/ex06/build/Debug/outDebug",
+      "cwd": "c:/YazılımEgitimi/42Kocaeli/C01/ex07",
+      "program": "c:/YazılımEgitimi/42Kocaeli/C01/ex07/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
