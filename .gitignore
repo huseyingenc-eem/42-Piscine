@@ -1,0 +1,29 @@
+# Derleyici çıktıları
+*.o
+*.out
+*.exe
+*.a
+*.so
+
+# Derleme çıktısı klasörü varsa
+/build
+/bin
+/obj
+
+# MacOS özel dosyaları
+.DS_Store
+
+# VSCode ayarları
+.vscode/
+
+# Yedek dosyalar
+*~
+# Geçici dosyalar
+*.swp
+*.swo
+.#*
+# Valgrind logları
+vgcore.*
+
+# norminette geçici dosyaları
+*.norm
