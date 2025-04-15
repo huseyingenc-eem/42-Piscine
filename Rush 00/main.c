@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/// @brief 
+/// @param x -> width 
+/// @param y -> height
 void	rush(int x, int y);
 
 int	main(void)

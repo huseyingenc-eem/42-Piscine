@@ -14,26 +14,28 @@
 
 void	ft_putchar(char c);
 
-void	print_line(char a, char b, char c, int x)
+void	print_line(char first, char middle, char last, int width)
 {
 	int	i;
 
 	i = 0;
-	if (x >= 1)
+	if (width >= 1)
 	{
-		ft_putchar(a);
+		ft_putchar(first);
 		i++;
-		while (i < x - 1)
+		while (i < width - 1)
 		{
-			ft_putchar(b);
+			ft_putchar(middle);
 			i++;
 		}
-		if (x > 1)
-			ft_putchar(c);
+		if (width > 1)
+			ft_putchar(last);
 		ft_putchar('\n');
 	}
 }
-
+/// @brief Yazı yazdırma
+/// @param x  -> width 
+/// @param y  -> height 
 void	rush(int x, int y)
 {
 	int	i;
