@@ -17,7 +17,7 @@ int	ft_is_prime(int nb)
 int main()
 {
 	printf("%d\n",ft_is_prime(2));
-	printf("%d\n",ft_is_prime(15));
+	printf("%d\n",ft_is_prime(17));
 	printf("%d\n",ft_is_prime(0));
 	printf("%d\n",ft_is_prime(1));
 	return 0;
