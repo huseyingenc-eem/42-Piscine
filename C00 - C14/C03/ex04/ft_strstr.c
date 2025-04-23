@@ -16,7 +16,6 @@ char *ft_strstr(char *str, char *to_find)
 
 
     
-    
     return start;
 }
 
@@ -25,7 +24,10 @@ char *ft_strstr(char *str, char *to_find)
 
 int main(void)
 {
+    char a= 'a';
+    
     char str1[] = "merhaba";
+
     char str2[] = "sevval";
     printf("%s", ft_strncat(str1,str2,4));    
     return 0;
