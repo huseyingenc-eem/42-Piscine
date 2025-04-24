@@ -44,7 +44,6 @@ void inter(char *src, char * to_find)
 		}
 		index++;
 	}
-	
 }
 
 int main(int argc, char *argv[])
