@@ -1,11 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solve_bsq.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bkinali <bkinali@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 05:54:13 by bkinali           #+#    #+#             */
+/*   Updated: 2025/04/30 06:20:56 by bkinali          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/bsq.h"
 
-// Yardımcı: Üç tamsayının minimumunu bulur.
-// a, b, c: Karşılaştırılacak sayılar.
-// min_val: Bulunan minimum değer.
 static int	min_of_three(int a, int b, int c)
 {
-	int	min_val; // Minimum değeri tutar
+	int	min_val;
 
 	min_val = a;
 	if (b < min_val)
@@ -15,131 +24,73 @@ static int	min_of_three(int a, int b, int c)
 	return (min_val);
 }
 
-// Yardımcı: DP (Dinamik Programlama) matrisini (int**) başlatır.
-// map: Harita bilgilerini içeren struct.
-// bsq_result: En büyük kare bilgilerini tutacak struct (başlangıç değerleri atanır).
-// dp_table: Oluşturulan DP tablosu.
-// row, col: Matris indeksleri (satır, sütun).
-static int	**init_dp_matrix(t_map_info *map, t_square *bsq_result)
+static int	calculate_cell_value(t_map_info *map, int **dp, int r, int c)
+{
+	if (map->grid[r][c] == map->obstacle)
+		return (0);
+	if (r == 0 || c == 0)
+		return (1);
+	return (1 + min_of_three(dp[r - 1][c], dp[r][c - 1], dp[r - 1][c - 1]));
+}
+
+static void	update_bsq(int current_val, int r, int c, t_square *bsq)
+{
+	if (current_val > bsq->size)
+	{
+		bsq->size = current_val;
+		bsq->x = c;
+		bsq->y = r;
+	}
+}
+
+static int	**create_dp_matrix(int lines, int cols)
 {
 	int	**dp_table;
-	int	row;
-	int	col;
+	int	i;
 
-	// Satırlar için yer ayır
-	dp_table = (int **)malloc(sizeof(int *) * map->lines);
+	dp_table = (int **)malloc(sizeof(int *) * lines);
 	if (!dp_table)
 		return (NULL);
-	row = 0;
-	while (row < map->lines)
+	i = 0;
+	while (i < lines)
 	{
-		// Her satır için sütunları ayır
-		dp_table[row] = (int *)malloc(sizeof(int) * map->cols);
-		if (!dp_table[row]) // Malloc hatası durumunda öncekileri serbest bırak
+		dp_table[i] = (int *)malloc(sizeof(int) * cols);
+		if (!dp_table[i])
 		{
-			while (--row >= 0)
-				free(dp_table[row]);
+			while (--i >= 0)
+				free(dp_table[i]);
 			free(dp_table);
 			return (NULL);
 		}
-		col = 0;
-		while (col < map->cols) // Başlangıç değeri olarak 0 ata
-		{
-			dp_table[row][col] = 0;
-			col++;
-		}
-		row++;
+		i++;
 	}
-	// Başlangıçta en büyük kare boyutu 0, koordinatlar 0
-	bsq_result->size = 0;
-	bsq_result->x = 0;
-	bsq_result->y = 0;
 	return (dp_table);
 }
 
-// Yardımcı: DP matrisini hesaplar ve en büyük kareyi bulur.
-// map: Harita bilgileri.
-// dp_table: Doldurulacak DP tablosu.
-// bsq_result: Bulunan en büyük kare bilgilerini günceller.
-// row, col: Matris indeksleri.
-static void	calculate_dp_and_find_bsq(t_map_info *map, int **dp_table,
-										t_square *bsq_result)
-{
-	int	row;
-	int	col;
-
-	row = 0;
-	while (row < map->lines)
-	{
-		col = 0;
-		while (col < map->cols)
-		{
-			if (map->grid[row][col] == map->obstacle)
-				dp_table[row][col] = 0; // Engel varsa kare bitemez
-			else // Boşluk karakteri ise
-			{
-				if (col == 0 || row == 0) // İlk satır veya sütun durumu
-					dp_table[row][col] = 1;
-				else // Diğer durumlar: sol, üst, sol-üst minimumunun 1 fazlası
-					dp_table[row][col] = 1 + min_of_three(dp_table[row - 1][col], \
-								dp_table[row][col - 1], dp_table[row - 1][col - 1]);
-				// En büyük kareyi güncelle
-				if (dp_table[row][col] > bsq_result->size)
-				{
-					bsq_result->size = dp_table[row][col];
-					bsq_result->x = col; // Sağ alt köşe sütun
-					bsq_result->y = row; // Sağ alt köşe satır
-				}
-			}
-			col++;
-		}
-		row++;
-	}
-}
-
-// Yardımcı: DP matrisini serbest bırakır.
-// dp_table: Serbest bırakılacak matris.
-// line_count: Matrisin satır sayısı.
-// row_idx: Döngü indeksi.
-static void	free_dp_matrix(int **dp_table, int line_count)
-{
-	int	row_idx;
-
-	row_idx = 0;
-	if (!dp_table)
-		return ;
-	while (row_idx < line_count)
-	{
-		if (dp_table[row_idx])
-			free(dp_table[row_idx]);
-		row_idx++;
-	}
-	free(dp_table);
-}
-
-// Ana çözüm fonksiyonu (bsq.h'de prototipi var)
-// map_info: İşlenecek harita bilgileri.
-// bsq_result: Bulunan en büyük karenin bilgileri.
-// dp_matrix: Dinamik programlama için kullanılan matris.
 t_square	solve_bsq(t_map_info *map_info)
 {
-	t_square	bsq_result;
-	int			**dp_matrix;
+	t_square	bsq;
+	int			**dp;
+	t_pos		pos;
 
-	// DP matrisini başlat
-	dp_matrix = init_dp_matrix(map_info, &bsq_result);
-	if (!dp_matrix)
+	dp = create_dp_matrix(map_info->lines, map_info->cols);
+	if (!dp)
+		return ((t_square){.x = 0, .y = 0, .size = 0});
+	bsq = (t_square){0, 0, 0};
+	init_pos(&pos);
+	while (++pos.row < map_info->lines)
 	{
-		// Malloc hatası durumunda boş kare döndür
-		bsq_result.size = 0;
-		bsq_result.x = 0;
-		bsq_result.y = 0;
-		return (bsq_result); // Hata dönüşü
+		pos.col = -1;
+		while (++pos.col < map_info->cols)
+		{
+			dp[pos.row][pos.col] = calculate_cell_value(map_info, dp,
+					pos.row, pos.col);
+			update_bsq(dp[pos.row][pos.col], pos.row, pos.col, &bsq);
+		}
 	}
-	// Matrisi doldur ve en büyük kareyi bul
-	calculate_dp_and_find_bsq(map_info, dp_matrix, &bsq_result);
-	// DP matrisini temizle
-	free_dp_matrix(dp_matrix, map_info->lines);
-	// Bulunan en büyük karenin bilgilerini döndür
-	return (bsq_result);
+	pos.row = -1;
+	while (++pos.row < map_info->lines)
+		free(dp[pos.row]);
+	free(dp);
+	return (bsq);
 }

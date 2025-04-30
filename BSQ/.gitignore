@@ -1,0 +1,26 @@
+# Derlenmiş dosyalar
+bsq
+bsq.exe
+
+# Nesne dosyaları (objeler)
+*.o
+
+# Yedek dosyalar (bazı editörler oluşturur)
+*~
+*.swp
+
+# VSCode çalışma dosyaları
+.vscode/
+
+# MSYS2 ve Windows gizli dosyaları
+*.exe
+*.out
+
+# Test haritaları
+Arguments/*.txt
+
+# Perl script çıktı dosyaları (varsa)
+*.pl~
+
+# Genel Mac OS gizli dosyalar
+.DS_Store

@@ -17,9 +17,8 @@ SRCS = src/main.c \
        src/read_map.c \
        src/solve_bsq.c \
        src/display_map.c \
-       # Eğer utils/ içinde derlenecek .c dosyaları varsa:
-       # srcs/utils/dosya1.c \
-       # srcs/utils/dosya2.c
+       src/utils.c \
+       src/read_map_utils.c
 
 # Kaynak dosyalarından nesne dosyalarını (.o) oluştur
 OBJS = $(SRCS:.c=.o)
