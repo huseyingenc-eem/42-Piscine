@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 02:15:36 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/21 02:22:32 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -7,13 +18,4 @@ int	ft_strcmp(char *s1, char *s2)
 		s2++;
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
-}
-#include <stdio.h>
-
-int main(void)
-{
-    char str1[] = "merhaba";
-    char str2[] = "merhaba";
-    printf("%d", ft_strcmp(str1,str2));    
-    return 0;
 }

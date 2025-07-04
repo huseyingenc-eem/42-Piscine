@@ -1,17 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 12:23:04 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/15 12:24:17 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void ft_putchar(char value)
+void	ft_putchar(char value)
 {
-    write(1,&value,1);
+	write(1, &value, 1);
 }
+
 void	ft_putstr(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	while (*str)
 	{
-		ft_putchar(str[i]);
-		i++;
+		ft_putchar(*str);
+		str++;
 	}
 }

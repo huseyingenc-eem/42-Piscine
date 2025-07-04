@@ -1,14 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 12:23:11 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/15 12:23:12 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <unistd.h>
-
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int lenght;
+	int	counter;
 
-    lenght=0;
-    while (str[lenght])
-    {
-        lenght++;
-    }
-    return (lenght);
+	counter = 0;
+	while (*str)
+	{
+		counter++;
+		str++;
+	}
+	return (counter);
 }

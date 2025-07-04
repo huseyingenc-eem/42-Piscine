@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 15:31:10 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/28 16:00:11 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 int	ft_is_prime(int nb)
 {
 	int	dividing;
@@ -12,13 +24,4 @@ int	ft_is_prime(int nb)
 		dividing++;
 	}
 	return (1);
-}
-#include<stdio.h>
-int main()
-{
-	printf("%d\n",ft_is_prime(2));
-	printf("%d\n",ft_is_prime(17));
-	printf("%d\n",ft_is_prime(0));
-	printf("%d\n",ft_is_prime(1));
-	return 0;
 }

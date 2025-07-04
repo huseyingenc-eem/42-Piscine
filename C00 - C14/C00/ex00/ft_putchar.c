@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgenc <hgenc@student.42kocaeli.com.tr> +#+  +:+       +#+            */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 12:00:00 by hgenc         #+#    #+#
- */
-/*   Updated: 2025/04/09 12:00:00 by hgenc        ###   ########.fr           */
+/*   Created: 2025/04/14 14:08:19 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/14 14:08:19 by hgenc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void    ft_putchar(char c) 
+void	ft_putchar(char c)
 {
-     write(1, &c, 1); 
+	write(1, &c, 1);
 }

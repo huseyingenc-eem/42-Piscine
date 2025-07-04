@@ -1,18 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 01:50:18 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/21 01:52:16 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_strncpy(char *dest, char *src, unsigned int n)
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-    char* ptr;
+	unsigned int	i;
 
-    ptr = dest;
-    while (n && *src)
-    {
-        *dest++=*src++;
-        n--;
-    }
-    while (n)
+	i = 0;
+	while (i < n && src[i] != '\0')
 	{
-		*dest++ = '\0';
-		n--;
+		dest[i] = src[i];
+		i++;
 	}
-	return (ptr);
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }

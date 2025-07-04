@@ -1,11 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_numbers.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 14:40:54 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/14 14:40:54 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void ft_print_numbers(void) {
-    char sayi;
-  
-    sayi = '0';
-    while (sayi <= '9') {
-      write(1, &sayi, 1);
-      sayi++;
-    }
-  }
+void	ft_print_numbers(void)
+{
+	char	sayi;
+
+	sayi = '0';
+	while (sayi <= '9')
+	{
+		write(1, &sayi, 1);
+		sayi++;
+	}
+}

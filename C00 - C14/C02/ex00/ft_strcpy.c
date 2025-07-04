@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 01:50:18 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/21 01:51:29 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
-    char* ptr;
+	char	*ptr;
 
-    ptr = dest;
-    while (*src)
-    {
-        *dest++=*src++;
-    }
-    *dest = '\0';
+	ptr = dest;
+	while (*src)
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
 	return (ptr);
 }

@@ -1,54 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_params.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgenc <hgenc@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/29 10:13:17 by hgenc             #+#    #+#             */
+/*   Updated: 2025/04/29 10:15:18 by hgenc            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void	ft_putstr(char *str)
+void	put_char(char c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+	write(1, &c, 1);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *lhs, char *rhs)
+{
+	while (*lhs && *rhs)
+	{
+		if (*lhs != *rhs)
+			return (*lhs - *rhs);
+		lhs++;
+		rhs++;
+	}
+	return (*lhs - *rhs);
+}
+
+void	swap(char **lhs, char **rhs)
+{
+	char	*tmp;
+
+	tmp = *lhs;
+	*lhs = *rhs;
+	*rhs = tmp;
+}
+
+void	sort_args(int argc, char **argv)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while ((s1[i] != '\0') && (s1[i] == s2[i]))
+	i = 1;
+	while (i < argc - 1)
+	{
+		j = i + 1;
+		while (j < argc)
+		{
+			if (ft_strcmp(argv[i], argv[j]) > 0)
+				swap(&argv[i], &argv[j]);
+			j++;
+		}
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	int		i;
-	int		j;
-	char	*temp;
+	char	*ptr;
 
-	i = 1;
-	while (i < argc - 1)
-	{
-		j = 1;
-		while (j < argc - 1)
-		{
-			if (ft_strcmp(argv[j], argv[j + 1]) > 0)
-			{
-				temp = argv[j];
-				argv[j] = argv[j + 1];
-				argv[j + 1] = temp;
-			}
-			j++;
-		}
-		i++;
-	}
+	sort_args(argc, argv);
 	i = 1;
 	while (i < argc)
 	{
-		ft_putstr(argv[i]);
-		write(1, "\n", 1);
+		ptr = argv[i];
+		while (*ptr)
+			put_char(*ptr++);
+		put_char('\n');
 		i++;
 	}
 	return (0);
